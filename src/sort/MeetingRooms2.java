@@ -26,7 +26,7 @@ public class MeetingRooms2 {
 		PriorityQueue<Integer> pq = new PriorityQueue<>();
         pq.offer(intervals[0].end);
         for(int i = 1;i < intervals.length;i++) {
-            if(intervals[i].start >= pq.peek()) {//current meeting does no have conflict, can re-use this meeting room.
+            if(intervals[i].start >= pq.peek()) {//current meeting does no have conflict with earliest-finished meeting, can re-use this meeting room.
                 pq.poll();
             } 
             pq.offer(intervals[i].end); //add current meeting's end time into heap.
