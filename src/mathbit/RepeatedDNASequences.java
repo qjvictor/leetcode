@@ -67,35 +67,34 @@ public class RepeatedDNASequences {
 		return result;
 	}
 	
-	
 	public List<String> findRepeatedDnaSequences(String s) {
-        List<String> ret = new ArrayList<>();
-        if(s==null || s.length()<10) return ret;
-        
-        Map<Character, Integer> map = new HashMap<>();
-        map.put('A', 0); //00
-        map.put('C', 1); //01
-        map.put('G', 2); //10
-        map.put('T', 3); //11
-        
-        Set<Integer> tmp = new HashSet<>();
-        int hash = 0;
-        for(int i=0;i<s.length();i++){
-            hash=(hash<<2)+map.get(s.charAt(i));
-            if(i>=9){
-            	hash=hash&((1<<20)-1);  //key
-            	if(!tmp.contains(hash)){
-                    tmp.add(hash);
-                }else{
-                	String sub = s.substring(i-9, i+1);
-                    if(!ret.contains(sub))
-                        ret.add(sub);
-                }
-            }
-        }
-        return ret;
-    }
-	
+		List<String> ret = new ArrayList<>();
+		if (s == null || s.length() < 10)
+			return ret;
+
+		Map<Character, Integer> map = new HashMap<>();
+		map.put('A', 0); // 00
+		map.put('C', 1); // 01
+		map.put('G', 2); // 10
+		map.put('T', 3); // 11
+
+		Set<Integer> tmp = new HashSet<>();
+		int hash = 0;
+		for (int i = 0; i < s.length(); i++) {
+			hash = (hash << 2) + map.get(s.charAt(i));
+			if (i >= 9) {
+				hash = hash & ((1 << 20) - 1); // key
+				if (!tmp.contains(hash)) {
+					tmp.add(hash);
+				} else {
+					String sub = s.substring(i - 9, i + 1);
+					if (!ret.contains(sub))
+						ret.add(sub);
+				}
+			}
+		}
+		return ret;
+	}
 	
 	
 	public static void main(String[] args){
