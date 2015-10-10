@@ -40,8 +40,45 @@ public class MaximumSubArray {
 		return max;
 	}
 
+/**
+	1) Divide the given array in two halves
+	2) Return the maximum of following three
+	….a) Maximum subarray sum in left half (Make a recursive call)
+	….b) Maximum subarray sum in right half (Make a recursive call)
+	….c) Maximum subarray sum such that the subarray crosses the midpoint
+*/
+	public int maxSubArrayDivideAndConquer(int[] nums){
+		if(nums==null || nums.length==0) return 0;
+		return divideAndConquer(nums, 0, nums.length-1);
+	}
+	
+	private int divideAndConquer(int[] nums, int left, int right){
+		if(left==right){
+			return nums[left];
+		}
+		int mid = (left+right)/2;
+		return Math.max(Math.max(divideAndConquer(nums, left, mid), divideAndConquer(nums, mid+1, right)), maxAcrossMid(nums, left, mid, right));
+	}
+	
+	
+	private int maxAcrossMid(int[] nums, int left, int mid, int right) {
+		int leftSum=Integer.MIN_VALUE;
+		int rightSum=Integer.MIN_VALUE;
+		int max=0;
+		for(int i=mid;i>=left; i--){
+			max+=nums[i]; 
+			leftSum=Math.max(max, leftSum);
+		}
+		max=0;
+		for(int i=mid+1;i<=right; i++){
+			max+=nums[i]; 
+			rightSum=Math.max(max, rightSum);
+		}
+		return leftSum+rightSum;
+	}
+
 	public static void main(String[] args) {
 		MaximumSubArray m = new MaximumSubArray();
-		System.out.println(m.maxSubArray(new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 }));
+		System.out.println(m.maxSubArrayDivideAndConquer(new int[] { -2, 1, -3, 4, -1, 2, 1, -5, 4 }));
 	}
 }
