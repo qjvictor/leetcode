@@ -17,26 +17,17 @@ package array;
  */
 public class FindTheDuplicateNumber {
 	public int findDuplicate(int[] nums) {
-		int entry;
-	    for (entry = 0; entry < nums.length; entry++)
-	        if (entry != nums[entry])
-	            break;
-
-	    int fast = entry;
-	    int slow = entry;
-
-	    do {
-	        fast = nums[nums[fast]];
-	        slow = nums[slow];
-	    } while (fast != slow);
-
-	    slow = entry;
-	    while (slow != fast) {
-	        slow = nums[slow];
-	        fast = nums[fast];
-	    }
-
-	    return slow;
+		int slow = 0, fast = 0;
+		do {
+			slow = nums[slow];
+			fast = nums[nums[fast]];
+		} while (slow != fast);
+		slow = 0;
+		while (slow != fast) {
+			slow = nums[slow];
+			fast = nums[fast];
+		}
+		return slow;
     }
 	
 	public static void main(String[] args){
