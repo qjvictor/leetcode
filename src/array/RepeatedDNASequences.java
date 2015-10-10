@@ -1,4 +1,4 @@
-package mathbit;
+package array;
 
 import java.util.ArrayList;
 import java.util.HashMap;
