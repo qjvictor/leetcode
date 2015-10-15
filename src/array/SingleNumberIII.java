@@ -42,18 +42,27 @@ public class SingleNumberIII {
 	public int[] singleNumber(int[] nums) {
 		if (nums == null)
 			return null;
-		int ret=0;
+		int val=0;
 		for(int i: nums){
-			ret^=i;
+			val^=i;
 		}
-		return null;
+		//val now is smaller^greater
 		
+		int[] ret = new int[2];
+		int diff = Integer.highestOneBit(val); //int diff=val&-val;
+		for(int i: nums){
+			if((diff&i)==0)  //less than the smaller single number.
+				ret[0]^=i;
+			else			 //greater than the greater single number.
+				ret[1]^=i;
+		}	
 		
+		return ret;
 	}	
 
 	public static void main(String[] args) {
 		SingleNumberIII s = new SingleNumberIII();
-		int[] ret = s._singleNumber(new int[] { 1, 1, 3, 3, 6, 7, 7, 8 });
+		int[] ret = s.singleNumber(new int[] { 1, 1, 3, 3, 6, 7, 7, 8 });
 		System.out.println(ret[0]+"-"+ret[1]);
 		
 		System.out.println(Integer.toBinaryString(5));
