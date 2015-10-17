@@ -1,4 +1,4 @@
-package string;
+package mathandbit;
 
 import java.util.ArrayList;
 import java.util.List;
