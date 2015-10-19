@@ -16,7 +16,7 @@ package array;
  * 
  */
 public class FindTheDuplicateNumber {
-	public int findDuplicate(int[] nums) {
+	public int _findDuplicate(int[] nums) {
 		int slow = 0, fast = 0;
 		do {
 			slow = nums[slow];
@@ -29,9 +29,25 @@ public class FindTheDuplicateNumber {
 		}
 		return slow;
     }
+	//binary search - O(n).
+	public int findDuplicate(int[] nums) {
+	    int low = 1, high = nums.length - 1;
+	    while (low <= high) {
+	        int mid = (int) (low + (high - low) * 0.5);
+	        int cnt = 0;
+	        for (int a : nums) {
+	            if (a <= mid) cnt++;
+	        }
+	        if (cnt <= mid) 
+	        	low = mid + 1;
+	        else 
+	        	high = mid - 1;
+	    }
+	    return low;
+	}
 	
 	public static void main(String[] args){
 		FindTheDuplicateNumber f = new FindTheDuplicateNumber();
-		System.out.println(f.findDuplicate(new int[]{1,2,3,4,5,6,6,7,8}));
+		System.out.println(f.findDuplicate(new int[]{1,2,6,3,4,5,6,7,8}));
 	}
 }

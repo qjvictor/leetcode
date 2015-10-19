@@ -24,6 +24,10 @@ public class FindRepeated2Elements {
 				ret[index++] = Math.abs(nums[i]);
 			} else {
 				nums[Math.abs(nums[i])] = -nums[Math.abs(nums[i])];
+				for(int v: nums){
+					System.out.print(v+" ");
+				}
+				System.out.println();
 			}
 		}
 		return ret;
@@ -33,8 +37,8 @@ public class FindRepeated2Elements {
 		FindRepeated2Elements f = new FindRepeated2Elements();
 		int[] ret = f.findRepeated2(new int[] { 4, 2, 4, 5, 2, 3, 1 }, 5);
 		System.out.println(ret[0] + " - " + ret[1]);
-		ret = f.findRepeated2(new int[] { 1, 2, 3, 1, 3, 6, 6 }, 7);
-		System.out.println(ret[0] + " - " + ret[1]);
+		//ret = f.findRepeated2(new int[] { 1, 2, 3, 1, 3, 6, 6 }, 7);
+		//System.out.println(ret[0] + " - " + ret[1]);
 		
 	}
 	
