@@ -30,31 +30,31 @@ import java.util.List;
  */
 public class DifferentWaystoAddParentheses {
 	public List<Integer> diffWaysToCompute(String input) {
-		List<Integer> ret = new ArrayList<>();
+		List<Integer> ret = new ArrayList<Integer>();
 		if (input == null || input.length() == 0)
 			return ret;
-		boolean onlyNumber = true;
+		if (input.length() == 1) {// edge case.
+			ret.add(Integer.parseInt(input));
+			return ret;
+		}
 		for (int i = 0; i < input.length(); i++) {
-			char c = input.charAt(i);
-			if (c == '+' || c == '-' || c == '*') {
-				onlyNumber = false;
+			if (input.charAt(i) < '0' || input.charAt(i) > '9') {
 				List<Integer> left = diffWaysToCompute(input.substring(0, i));
 				List<Integer> right = diffWaysToCompute(input.substring(i + 1));
 				for (int x : left) { // get all combinations.
 					for (int y : right) {
-						if (c == '-') {
-							ret.add(x - y);
-						} else if (c == '+') {
+						char operator = input.charAt(i);
+						if (operator == '+') {
 							ret.add(x + y);
-						} else if (c == '*') {
+						} else if (operator == '-') {
+							ret.add(x - y);
+						} else {
 							ret.add(x * y);
 						}
 					}
 				}
 			}
 		}
-		if (onlyNumber)
-			ret.add(Integer.valueOf(input));// very important: for case left or right only contains a number, return it.
 		return ret;
     }
 	
