@@ -1,4 +1,4 @@
-package backtracking;
+package string;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -50,7 +50,7 @@ public class WordLadder {
 		HashSet<String> visited = new HashSet<String>();
 		int level = 1;
 		int currentWordNum = 1;    //how many words in current level.
-		int nextWordNum = 0;     //how many words in next level.
+		int nextWordNum = 0;       //how many words in next level.
 		queue.offer(beginWord);
 		visited.add(beginWord);
 		while (!queue.isEmpty()) {
