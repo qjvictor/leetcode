@@ -35,11 +35,9 @@ public class MissingRanges {
 	}
 	private void makeRange(ArrayList<String> res, int start, int end) {
 	    if (start == end) {
-	        res.add(start + "");
+	        res.add(String.valueOf(start));
 	    } else {
-	        StringBuilder sb = new StringBuilder();
-	        sb.append(start).append("->").append(end);
-	        res.add(sb.toString());
+	        res.add(start+"->"+end);
 	    }
 	}
 	
