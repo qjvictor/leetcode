@@ -3,7 +3,7 @@ import java.util.Comparator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
-import linklist.ListNode;
+import datastructure.ListNode;
 
 /**
  * Merge k sorted linked lists and return it as one sorted list. Analyze and

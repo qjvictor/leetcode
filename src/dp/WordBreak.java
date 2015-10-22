@@ -25,7 +25,7 @@ public class WordBreak {
 		for (int i = 1; i < n + 1; i++) {
 			for (int j = 0; j < i; j++) {
 				String sub = s.substring(j, i);
-				if (wordDict.contains(sub) && dp[j]) { // Explain: dp[j] - 0-(j-1) canbe formed by dict,
+				if (wordDict.contains(sub) && dp[j]) { // Explain: dp[j] - 0-(j-1) can be formed by dict,
 														// and substring from j->i also in wordDict,
 														// so the dp[i] is true;
 					dp[i] = true;

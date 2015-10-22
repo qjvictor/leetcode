@@ -60,9 +60,9 @@ public class MeetingRooms2 {
                 available++;  
                 e++;  
             }  
-            if (available > 0)  
+            if (available > 0)  //take one from available.
                 available--;  
-            else  
+            else  //no more free, have to get a new room.
                 rooms++;  
         }  
         return rooms;  
