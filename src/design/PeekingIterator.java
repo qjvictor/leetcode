@@ -25,37 +25,37 @@ public class PeekingIterator implements Iterator<Integer> {
 
 	Iterator<Integer> it = null;
 	Integer peekedElement = null;
-	
+
 	public PeekingIterator(Iterator<Integer> iterator) {
 		it = iterator;
 	}
 
-    // Returns the next element in the iteration without advancing the iterator.
+	// Returns the next element in the iteration without advancing the iterator.
 	public Integer peek() {
-        if(peekedElement==null){
-        	if(it.hasNext()){
-        		peekedElement = it.next();
-        	}
-        }
-        return peekedElement;
+		if (peekedElement == null) {
+			if (it.hasNext()) {
+				peekedElement = it.next();
+			}
+		}
+		return peekedElement;
 	}
 
 	// hasNext() and next() should behave the same as in the Iterator interface.
 	// Override them if needed.
 	@Override
 	public Integer next() {
-	    if(peekedElement!=null){
-	    	Integer ret = new Integer(peekedElement);
-	    	peekedElement = null;
-	    	return ret;
-	    } else{
-	    	return it.next();
-	    }
+		if (peekedElement != null) {
+			Integer ret = new Integer(peekedElement);
+			peekedElement = null;
+			return ret;
+		} else {
+			return it.next();
+		}
 	}
 
 	@Override
 	public boolean hasNext() {
-	    return peekedElement!=null || it.hasNext();
+		return peekedElement != null || it.hasNext();
 	}
 
 	@Override

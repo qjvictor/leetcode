@@ -23,7 +23,6 @@ public class PowerOfTwo {
 	
 	public static void main(String[] args){
 		PowerOfTwo  p = new PowerOfTwo();
-		System.out.println(p.isPowerOfTwo(4));
 		for(int i=0;i<100;i++){
 			System.out.println(i+" - "+p.isPowerOfTwo(i));
 		}
