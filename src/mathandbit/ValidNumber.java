@@ -31,7 +31,7 @@ public class ValidNumber {
         	i++;
         	isNumber=true;
         }
-        //Dot
+        //Dot: should be dealt with point part together.
 		if (i < len && s.charAt(i) == '.') {  //how come '3.' is a valid number?
 			i++;
 			while (i < len && s.charAt(i) >= '0' && s.charAt(i) <= '9') {// point part
