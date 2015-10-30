@@ -6,17 +6,20 @@ package datastructure;
  */
 public class ReverseLinkedList {
 	public ListNode _reverseList(ListNode head) {
-		if(head==null || head.next==null) return head;
-        ListNode next = head.next;
-        head.next = null;
-        while(next!=null){
-            ListNode tmp = next.next;
-            next.next=head;
-            head = next;
-            next = tmp;
-        }
-        return head;
-    }
+		if (head == null || head.next == null)
+			return head;
+		return helper(head, new ListNode(-1));
+	}
+
+	private ListNode helper(ListNode cur, ListNode dummy) {
+		if (cur == null) {//game over.
+			return dummy.next;
+		}
+		ListNode tmp = cur.next;   //keep not reversed nodes.
+		cur.next = dummy.next;     //point current node to the new head; 
+		dummy.next = cur;		   //change the new head.	
+		return helper(tmp, dummy); //keep processing not reversed nodes.
+	}
 	
 	public ListNode reverseList(ListNode head) {
 		if (head == null || head.next == null)
@@ -34,7 +37,7 @@ public class ReverseLinkedList {
 	public static void main(String[] args){
 		ListNode node = new ListNode(new int[]{1,2,3,4});
 		ReverseLinkedList r = new ReverseLinkedList();
-		ListNode h = r.reverseList(node);
+		ListNode h = r._reverseList(node);
 		h.print();
 		
 	}
