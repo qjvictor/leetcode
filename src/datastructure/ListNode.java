@@ -14,7 +14,7 @@ public class ListNode {
 			System.out.print(tmp.val + "->");
 			tmp = tmp.next;
 		}
-		System.out.println("NULL");
+		System.out.print("NULL");
 		System.out.println();
 	}
 
