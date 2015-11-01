@@ -11,9 +11,10 @@ public class ListNode {
 	public void print() {
 		ListNode tmp = this;
 		while (tmp != null) {
-			System.out.print(tmp.val + " ");
+			System.out.print(tmp.val + "->");
 			tmp = tmp.next;
 		}
+		System.out.println("NULL");
 		System.out.println();
 	}
 
