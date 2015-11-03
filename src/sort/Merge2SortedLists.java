@@ -1,5 +1,5 @@
 package sort;
-import datastructure.ListNode;
+import datastructure.linkedlist.ListNode;
 
 /**
  * Merge two sorted linked lists and return it as a new list. The new list

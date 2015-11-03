@@ -1,7 +1,7 @@
 package kthLargest;
 import java.util.Stack;
 
-import datastructure.TreeNode;
+import datastructure.tree.TreeNode;
 
 /**
  * Given a binary search tree, write a function kthSmallest to find the kth
