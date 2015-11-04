@@ -22,18 +22,18 @@ public class RemoveNthNodeFromEndOfList {
 		ListNode fast = head;
 		ListNode dummy = new ListNode(-1);
 		dummy.next = slow;
-		while (fast != null && n > 0) {
+		while (fast != null && n > 0) {//note: why not n>=0, because we want to position the slow to the previous node right before the removed node.
 			fast = fast.next;
 			n--;
 		}
-		if (fast == null) // n>=the length of the list.
-			return slow.next;
+		if (fast == null) // n>=the length of the list, remove the first node.
+			return head.next;
 
 		while (fast.next != null) {
 			fast = fast.next;
 			slow = slow.next;
 		}
-		slow.next = slow.next.next;
+		slow.next = slow.next.next;//skip the nth node.
 		return dummy.next;
     }
 	
@@ -41,7 +41,7 @@ public class RemoveNthNodeFromEndOfList {
 	public static void main(String[] args){
 		RemoveNthNodeFromEndOfList r = new RemoveNthNodeFromEndOfList();
 		ListNode head = new ListNode(new int[]{1,2});
-		ListNode ret = r.removeNthFromEnd(head, 1);
+		ListNode ret = r.removeNthFromEnd(head, 3);
 		ret.print();
 	}
 }

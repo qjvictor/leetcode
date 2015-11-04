@@ -32,7 +32,7 @@ public class ReverseLinkedListII {
         ListNode cur = mNode.next;  
         while(i<n && cur!=null){ 
         	ListNode tmp = cur.next;
-        	//move current node to right after pre, and move pre's next pointer to current node.
+        	//move current node to left after pre, and move pre's next pointer to current node.
         	cur.next=pre.next;
         	pre.next=cur;
         	//move current to the next.

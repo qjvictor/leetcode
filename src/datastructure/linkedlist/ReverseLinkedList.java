@@ -27,17 +27,19 @@ public class ReverseLinkedList {
 		ListNode dummy = new ListNode(-1);
 		while (head != null) {
 			ListNode tmp = head.next;// keep the next as tmp
-			head.next = dummy.next; // head point to dummy's next, which is the new head.
-			dummy.next = head; // change the dummy's next to head, head becomesthe new head.
+			head.next = dummy.next; // head point to dummy's next, which is the old head.
+			dummy.next = head; // change the dummy's next to head, head becomes the new head.
 			head = tmp; // move head to the tmp
 		}
 		return dummy.next;
 	}
 	
+	
+	
 	public static void main(String[] args){
 		ListNode node = new ListNode(new int[]{1,2,3,4});
 		ReverseLinkedList r = new ReverseLinkedList();
-		ListNode h = r._reverseList(node);
+		ListNode h = r.reverseList(node);
 		h.print();
 		
 	}
