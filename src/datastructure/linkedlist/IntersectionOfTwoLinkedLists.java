@@ -37,6 +37,7 @@ public class IntersectionOfTwoLinkedLists {
 				l2 = l2.next;
 			else
 				l2 = headA;
+			
 			if (l1 == l2) // might point to NULL or point to the start of the
 							// intersection. (if no intersection, will point to
 							// NULL at same time).

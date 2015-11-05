@@ -17,10 +17,10 @@ public class RemoveLinkedListElements {
 		ListNode pre = dummy;
 		while (head != null) {
 			if (head.val == val)
-				pre.next = head.next; // remove element
+				pre.next = head.next; // pre not moved, point to next element. (skip the current eleemnt).
 			else
-				pre = pre.next;
-			head = head.next; // move to next
+				pre = pre.next;       //pre moved
+			head = head.next; 
 		}
 		return dummy.next;
 		

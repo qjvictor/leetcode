@@ -8,49 +8,46 @@ Could you do it in O(n) time and O(1) space?
  *
  */
 public class PalindromeLinkedList {
-	//find the mid, reverse the half and compare.
 	public boolean isPalindrome(ListNode head) {
 		if (head == null || head.next == null)
 			return true;
-		int len = 1;
 		ListNode fast = head;
 		ListNode slow = head;
-		while (fast != null) {
-			len++;
-			fast = fast.next;
-		}
-		fast = head;
-
 		while (fast != null && fast.next != null) {
 			fast = fast.next.next;
 			slow = slow.next;
 		}
-		if (len % 2 == 0)
+		//key:  if fast is null, length is even number, slow is in the beginning of second half.
+		//		ie:  1->2->3->4    fast is null, slow is in 3.
+		//		if fast is not null, length is odd number, slow is in previous node of second half beginning.
+		//		ie:  1->2->3->4->5  fast is not null, in 5,  slow is in 3, need to move one more step.
+		if (fast != null)
 			slow = slow.next;
-
-		// reverse the second half.
-		ListNode tmp = new ListNode(-1);
+		
+		ListNode reversed = new ListNode(-1);
 		while (slow != null) {
-			ListNode next = slow.next;
-			slow.next = tmp.next;
-			tmp.next = slow;
-			slow = next;
+			ListNode tmp = slow.next;
+			slow.next = reversed.next;
+			reversed.next = slow;
+			slow = tmp;
 		}
-
+		
 		fast = head;
-		slow = tmp.next;
+		slow = reversed.next;
 		while (slow != null) {
-			if (slow.val != fast.val)
+			if (fast.val != slow.val)
 				return false;
 			slow = slow.next;
 			fast = fast.next;
 		}
 		return true;
-    }
+	}
+	
+	
 	
 	public static void main(String[] args) {
 		PalindromeLinkedList r = new PalindromeLinkedList();
-		System.out.println(r.isPalindrome(new ListNode(new int[] { 0,1,1,1,2,2,2,2,3})));
+		System.out.println(r.isPalindrome(new ListNode(new int[] { 1,2,3,4,5})));
 		System.out.println(r.isPalindrome(new ListNode(new int[] { 1,2,1})));
 		System.out.println(r.isPalindrome(new ListNode(new int[] { 1,2,2,1})));
 		System.out.println(r.isPalindrome(new ListNode(new int[] { 1,2,5, 2,1})));
