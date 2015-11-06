@@ -93,7 +93,7 @@ public class ReorderList {
 	
 
 	public static void main(String[] args){
-		ListNode node = new ListNode(new int[]{1,2,3,4,5});
+		ListNode node = new ListNode(new int[]{1,2,3,4});
 		ReorderList r = new ReorderList();
 		r.reorderList(node);
 		

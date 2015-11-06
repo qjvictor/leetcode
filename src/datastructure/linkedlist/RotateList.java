@@ -37,10 +37,43 @@ public class RotateList {
 	    return head;
     }
 	
+	
+	public ListNode _rotateRight(ListNode head, int k) {
+		if (head == null || head.next == null || k <= 0)
+			return head;
+		ListNode dummy = new ListNode(-1);
+		dummy.next = head;
+		int len = 0;
+		ListNode tail = null;
+		while (head != null) {
+			len++;
+			if (head.next == null) {
+				tail = head;
+			}
+			head = head.next;
+		}
+		k = k % len;
+		if (k == 0)
+			return dummy.next;
+
+		tail.next = dummy.next;// connect as a cycle.
+
+		head = dummy.next;
+		int step = len - k - 1;
+
+		while (step > 0) {
+			head = head.next;
+			step--;
+		}
+		dummy.next = head.next;
+		head.next = null;
+		return dummy.next;
+    }
+	
 	public static void main(String[] args){
-		ListNode node = new ListNode(new int[]{1,2,3,4,5});
+		ListNode node = new ListNode(new int[]{1,2,3,4,5,6,7});
 		RotateList r = new RotateList();
-		ListNode h = r.rotateRight(node,2);
+		ListNode h = r._rotateRight(node,3);
 		h.print();
 		
 	}

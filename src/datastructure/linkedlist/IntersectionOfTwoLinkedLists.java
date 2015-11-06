@@ -27,30 +27,23 @@ public class IntersectionOfTwoLinkedLists {
 			return null;
 		ListNode l1 = headA;
 		ListNode l2 = headB;
-		while (l1 != null || l2 != null) {
-			if (l1 != null)
-				l1 = l1.next;
-			else
-				l1 = headB;
-
-			if (l2 != null)
-				l2 = l2.next;
-			else
-				l2 = headA;
-			
-			if (l1 == l2) // might point to NULL or point to the start of the
-							// intersection. (if no intersection, will point to
-							// NULL at same time).
-				return l1;
+		// if a & b have different len, then we will stop the loop after second
+		// iteration
+		while (l1 != l2) {
+			// for the end of first iteration, we just reset the pointer to the
+			// head of another linkedlist
+			l1 = l1 == null ? headB : l1.next;
+			l2 = l2 == null ? headA : l2.next;
 		}
-		return null;
+		return l1;
     }
 	
 	
 	public static void main(String[] args) {
 		IntersectionOfTwoLinkedLists r = new IntersectionOfTwoLinkedLists();
-		ListNode headA = new ListNode(new int[] { 1,2});
-		ListNode headB = new ListNode(new int[] { 11});
+		ListNode l1 = new ListNode(new int[] { 1});
+		ListNode headA = l1;
+		ListNode headB = l1;
 		ListNode ret = r.getIntersectionNode(headA, headB);
 		ret.print();
 	}
