@@ -32,7 +32,7 @@ public class PartitionList {
 			head = head.next;
 		}
 		l2.next = null; //important
-		l1.next = dummy2.next;
+		l1.next = dummy2.next;//append 'big' to 'small'
 		return dummy1.next;
 	}
 	
