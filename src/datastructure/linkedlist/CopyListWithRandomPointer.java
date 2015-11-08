@@ -69,6 +69,39 @@ public class CopyListWithRandomPointer {
 		return newHead;
 	}
 	
+	public RandomListNode copyRandomList2(RandomListNode head) {
+		if (head == null)
+			return null;
+		RandomListNode p=head;
+		//step 1: copy the original node, and insert after the original node.
+		//1->2->3   ===>   1->1'->2->2'->3-3'
+		while(p!=null){
+			RandomListNode next = p.next;
+			RandomListNode copy = new RandomListNode(p.label);
+			p.next=copy;
+			copy.next=next;
+			p=next;
+		}
+		p=head;
+		//step 2: copy the random pointer
+		while (p != null) {
+			p.next.random = p.random == null ? null : p.random.next;
+			p = p.next.next;
+		}
+		p=head;
+		// step 3: create the copied list.
+		RandomListNode newHead = head.next;
+		p = head;
+		while (p != null) {
+			RandomListNode newNode = p.next;
+			p.next = newNode.next;
+			if (newNode.next != null)
+				newNode.next = newNode.next.next;
+			p = p.next;
+		}
+		return newHead;
+	}
+	
 	
 	public static void main(String[] args){
 		CopyListWithRandomPointer cp = new CopyListWithRandomPointer();
@@ -82,7 +115,7 @@ public class CopyListWithRandomPointer {
 		r1.random = r3;
 		r2.random=r2;
 		r4.random=r1;
-		RandomListNode r = cp.copyRandomList1(r1);
+		RandomListNode r = cp.copyRandomList2(r1);
 		System.out.println(r);
 	}
 }
