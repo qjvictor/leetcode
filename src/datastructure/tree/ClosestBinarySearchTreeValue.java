@@ -48,6 +48,5 @@ public class ClosestBinarySearchTreeValue {
 
 		TreeNode t1 = new TreeNode(0);
 		System.out.println(c.closestValue(t1, 2147483648.0));
-
 	}
 }
