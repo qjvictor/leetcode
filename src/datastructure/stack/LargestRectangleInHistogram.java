@@ -1,6 +1,6 @@
 package datastructure.stack;
 
-import java.util.LinkedList;
+import java.util.Stack;
 
 /**
  * Given n non-negative integers representing the histogram's bar height where
@@ -24,7 +24,7 @@ public class LargestRectangleInHistogram {
 		if (height == null || height.length == 0)
 			return 0;
 		int max = 0;
-		LinkedList<Integer> stack = new LinkedList<Integer>();
+		Stack<Integer> stack = new Stack<Integer>();
 		for (int i = 0; i < height.length; i++) {
 			while (!stack.isEmpty() && height[i] <= height[stack.peek()]) { //get the max area before index i.
 				int index = stack.pop();
@@ -33,7 +33,7 @@ public class LargestRectangleInHistogram {
 			}
 			stack.push(i);
 		}
-		while (!stack.isEmpty()) {//
+		while (!stack.isEmpty()) {
 			int index = stack.pop();
 			int curArea = stack.isEmpty() ? height.length * height[index] : (height.length - stack.peek() - 1) * height[index];
 			max = Math.max(max, curArea);

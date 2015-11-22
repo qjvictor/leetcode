@@ -54,11 +54,57 @@ public class BasicCalculator {
         return res;
     }
 	
+	
+	public int calculate2(String s){
+		if (s == null || s.length() == 0)
+			return 0;
+		Stack<String> stk = new Stack<>();
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if (c == ' ')
+				continue;
+			if (c >= '0' && c <= '9') {
+				StringBuilder num = new StringBuilder();
+				while (i < s.length()
+						&& (s.charAt(i) >= '0' && s.charAt(i) <= '9')) {
+					num.append(s.charAt(i++));
+				}
+				i = i - 1;
+				helper(stk, num.toString());
+			} else if (c=='+' || c=='-' || c=='(') {
+				stk.push(c+"");
+			} else {// )
+				String num = stk.pop();
+				stk.pop();// pop '('
+				helper(stk, num);
+			}
+		}
+		return Integer.parseInt(stk.pop());
+	}
+	
+	private void helper(Stack<String> stk, String num) {
+		if (stk.isEmpty() || stk.peek().equals("(")) {
+			stk.push(num);
+		} else {
+			String oper = stk.pop();
+			int curNum = Integer.parseInt(num);
+			int lastNum = Integer.parseInt(stk.pop());
+			int newNum = 0;
+			if (oper.equals("+")) {
+				newNum = curNum + lastNum;
+			} else {
+				newNum = lastNum - curNum;
+			}
+			stk.push(newNum + "");
+		}
+	}
+	
+	
 	public static void main(String[] args){
 		BasicCalculator b = new BasicCalculator();
-		System.out.println(b.calculate("(1+(4+5+2)-3)+(6+8)"));
-		System.out.println(b.calculate("1 + 1"));
-		System.out.println(b.calculate("2-1 + 2 "));
+		System.out.println(b.calculate2("2-1 + 2 "));
+		System.out.println(b.calculate2("(1+(4+5+2)-3)+(6+8)"));
+		System.out.println(b.calculate2("1 + 1"));
 		
 		
 	}

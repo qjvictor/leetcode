@@ -27,11 +27,15 @@ Answer: 3
 public class NumberOfIslands {
 	public static void main(String[] args){
 		NumberOfIslands w = new NumberOfIslands();
-		char[] col1=new char[]{'1','1','1','1','0'};
-		char[] col2=new char[]{'1','1','0','0','0'};
-		char[] col3=new char[]{'0','0','1','0','0'};
-		char[] col4=new char[]{'0','0','0','1','1'};
-		char[][] square=new char[][]{col1, col2, col3, col4};
+		//["111111111","100000001","101010101","101111101","101010101","100000001","111111111"]
+		char[] col0 = new char[] { '1', '1', '1', '1', '1', '1', '1', '1', '1' };
+		char[] col1 = new char[] { '1', '0', '0', '0', '0', '0', '0', '0', '1' };
+		char[] col2 = new char[] { '1', '0', '1', '0', '1', '0', '1', '0', '1' };
+		char[] col3 = new char[] { '1', '0', '1', '1', '1', '1', '1', '0', '1' };
+		char[] col4 = new char[] { '1', '0', '1', '0', '1', '0', '1', '0', '1' };
+		char[] col5 = new char[] { '1', '0', '0', '0', '0', '0', '0', '0', '1' };
+		char[] col6 = new char[] { '1', '1', '1', '1', '1', '1', '1', '1', '1' };
+		char[][] square = new char[][] { col0, col1, col2, col3, col4, col5, col6 };
 		System.out.println(w.numIslands(square));
 	}
 	
