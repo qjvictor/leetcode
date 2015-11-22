@@ -24,25 +24,25 @@ package dp;
 // numArray.sumRange(1, 2);
  */
 public class NumArray {
-	int[] diff;
+	int[] sumArray;
 	public NumArray(int[] nums) {
 		if (nums == null || nums.length == 0)
 			return;
-		diff = new int[nums.length];
-		diff[0] = nums[0];
+		sumArray = new int[nums.length];
+		sumArray[0] = nums[0];
 
 		for (int i = 1; i < nums.length; i++) {
-			diff[i] = diff[i - 1] + nums[i];
+			sumArray[i] = sumArray[i - 1] + nums[i];
 		}
     }
 
     public int sumRange(int i, int j) {
-		if (diff == null || diff.length == 0 || i < 0 || j >= diff.length || i>j)
+		if (sumArray == null || sumArray.length == 0 || i < 0 || j >= sumArray.length || i>j)
 			return -1;
 		if (i == 0)
-			return diff[j];
+			return sumArray[j];
 		else
-			return diff[j] - diff[i-1];
+			return sumArray[j] - sumArray[i-1];
     }
     
     public static void main(String[] args){
