@@ -1,7 +1,4 @@
 package datastructure.tree;
-
-import java.util.*;
-
 /**
  * Given a binary tree, count the number of uni-value subtrees.
 

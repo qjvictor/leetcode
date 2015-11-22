@@ -43,7 +43,7 @@ public class KthSmallestElementInBST {
 	
 	public int kthSmallest(TreeNode root, int k) {
 		int leftCount = countNodes(root.left) + 1; // left count = left sub tree
-													// nodes + currnt root node.
+													// nodes + current root node.
 		if (leftCount == k) {
 			return root.val;
 		} else if (leftCount > k) { // go left.

@@ -27,16 +27,17 @@ Note: Recursive solution is trivial, could you do it iteratively?
 public class BinaryTreePostorderTraversal {
 	public List<Integer> postorderTraversal(TreeNode root) {
 		List<Integer> ret = new ArrayList<>();
-		if(root==null) return ret;
+		if (root == null)
+			return ret;
 		Stack<TreeNode> stk = new Stack<>();
 		TreeNode lastVisited = null;
-		while(!stk.isEmpty() || root!=null){
-			if(root!=null){
+		while (!stk.isEmpty() || root != null) {
+			if (root != null) {
 				stk.push(root);
-				root=root.left;
-			}else{
+				root = root.left;
+			} else {
 				TreeNode peek = stk.peek();
-                if(peek.right!=null && peek.right!=lastVisited){
+				if (peek.right != null && peek.right != lastVisited) {
 					root = peek.right;
 				} else {
 					stk.pop();

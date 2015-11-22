@@ -49,7 +49,7 @@ public class FlattenBinaryTreeToLinkedList {
 			}
 			cur = cur.right;
 		}
-    }
+   	}
 
 	public void _flatten(TreeNode root) {
 		if (root == null)

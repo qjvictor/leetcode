@@ -39,8 +39,6 @@ public class LargestRectangleInHistogram {
 			max = Math.max(max, curArea);
 		}
 		return max;
-		
-		
 	}
 	
 	public static void main(String[] args){
