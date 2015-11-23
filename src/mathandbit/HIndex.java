@@ -24,20 +24,40 @@ import java.util.Map;
  * 
  */
 public class HIndex {
-	public int hIndex(int[] citations) {
-		if (citations == null || citations.length == 0)
-			return 0;
-		Arrays.sort(citations);
-		int len = citations.length;
-		for (int i=citations.length-1;i>=0; i--) {
-			if (i >= citations[i])
-				return i;
+	public int _hIndex(int[] citations) {
+		int n = citations.length;
+	    int[] count = new int[n+1];
+		for (int i = 0; i < n; i++) {
+			if (citations[i] > n)
+				count[n]++;
+			else
+				count[citations[i]]++;
 		}
-		return len;
+		for (int i = n; i > 0; i--) {
+			if (count[i] >= i)
+				return i;
+			count[i - 1] += count[i];
+		}
+		return 0;
+    }
+	
+    public int hIndex(int[] citations) {
+    	if(citations == null || citations.length == 0)
+            return 0;
+        Arrays.sort(citations);
+        int result = 0;
+        for (int i = citations.length - 1; i >= 0; i--) {
+            if (result >= citations[i]) {
+                return result;
+            }
+            result++;
+        }
+        return result;
     }
 	
 	public static void main(String[] args){
 		HIndex h = new HIndex();
+		System.out.println(h.hIndex(new int[]{3, 0, 6, 1, 5}));
 		System.out.println(h.hIndex(new int[]{100, 101}));
 		System.out.println(h.hIndex(new int[]{0,1,2,3,4}));
 		System.out.println(h.hIndex(new int[]{0,1,2,2}));

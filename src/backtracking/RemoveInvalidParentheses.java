@@ -3,6 +3,7 @@ package backtracking;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Remove the minimum number of invalid parentheses in order to make the input
@@ -20,92 +21,105 @@ import java.util.List;
  * 
  */
 public class RemoveInvalidParentheses {
-	/**
-	 * 
-	 First find out the minimum number of parentheses to be removed by
-	 * scanning the string. Explore all combinations of the strings by DFS and
-	 * add to the result if the parentheses are balanced and valid, return the
-	 * current recursion call early if either of the following happens: (1) The
-	 * number of removed parentheses have exceeded the minimum number
-	 * calculated. (2) Both "(" and ")" have occurred and the remaining
-	 * combinations of the current recursion are duplicates.
-	 */
-	public List<String> removeInvalidParentheses(String s) {
-		List<String> res = new ArrayList<>();
+	//too slow.
+	public List<String> _removeInvalidParentheses(String s) {
+		List<String> ret = new ArrayList<>();
 		if (s == null || s.length() == 0) {
-			res.add("");
-			return res;
+			ret.add("");
+			return ret;
 		}
-		StringBuilder sb = new StringBuilder();
-		int target = 0; // minimum number to be removed
+		int minRemove = 0; // minimum number to be removed
 		int leftCnt = 0; // count of "("
 		// calculate minimum number to be removed
 		// by counting the numbers of matching pairs "()", ")(" doesn't count
 		for (int i = 0; i < s.length(); i++) {
 			if (leftCnt > 0 && s.charAt(i) == ')') {
-				target--;
+				minRemove--;
 				leftCnt--;
 			} else if (s.charAt(i) == ')')
-				target++;
+				minRemove++;
 			else if (s.charAt(i) == '(') {
-				target++;
+				minRemove++;
 				leftCnt++;
 			}
 		}
-		Helper(s, sb, 0, 0, 0, target, res);
-		return res;
+		Set<String> st = new HashSet<>();
+		helper(st, 0, minRemove, "",s);
+		if (st.isEmpty()) {
+			st.add("");
+		}
+		ret.addAll(st);
+		return ret;
 	}
 
-	private void Helper(String s, StringBuilder sb, int start, int count,
-			int removeNum, int target, List<String> res) {
-		if (start >= s.length() && count == 0) {// check if "(", ")" are
-												// balanced
-			res.add(sb.toString());
+	private void helper(Set<String> ret, int i, int minRemove, String str, String s) {
+		String newStr = str+s.substring(i);
+		if(minRemove==0 && isValid(newStr)){
+			ret.add(newStr);
 			return;
 		}
-		// used to store if both "(" and ")" have occurred
-		HashSet<Character> set = new HashSet<>();
-		// The last character might be removed to form valid parentheses
-		// that's when i == s.length()
-		for (int i = start; i <= s.length(); i++) {
-			if (count == 0 && i < s.length() && s.charAt(i) == ')')
-				continue;
-			// At the nth recursion, if both '(' and ')' have occurred, return
-			// early
-			// to eliminate duplicate paths
-			if (i < s.length() && set.contains(s.charAt(i))) {
-				if (set.size() == 2)
-					return;
-				else
-					continue;
-			} else {
-				if (i < s.length())
-					set.add(s.charAt(i));
-			}
-			int temp1 = count;
-			int temp2 = removeNum;
-			if (i < s.length() && s.charAt(i) == '(')
-				count++;
-			else if (i < s.length() && s.charAt(i) == ')')
-				count--;
-			removeNum = removeNum + (i - start);
-			if (removeNum > target) // return early if parentheses removed
-									// exceeds target
-				return;
-			if (i < s.length())
-				sb.append(s.charAt(i));
-			Helper(s, sb, i + 1, count, removeNum, target, res);
-			if (i < s.length())
-				sb.deleteCharAt(sb.length() - 1);
-			count = temp1;
-			removeNum = temp2;
+		
+		if(minRemove==0) {
+			return;
 		}
+		if(i>=s.length()) return;
+		
+		//ignore current char.
+		if(s.charAt(i)=='(' || s.charAt(i)==')' ){
+			helper(ret, i+1, minRemove-1, str, s);
+		} 
+		helper(ret, i+1, minRemove, str+s.charAt(i), s);
+	}
+	
+	private boolean isValid(String str){
+		int n = 0;
+		for(char c:str.toCharArray()){
+			if(c=='('){
+				n++;
+			}else if(c==')'){
+				n--;
+			}
+			if(n<0) return false;
+		}
+		return n==0;
+	}
+
+	
+	public List<String> removeInvalidParentheses(String s) {
+	    List<String> res = new ArrayList<>();
+	    dfs(res, s, 0, new StringBuilder(), 0);
+	    return res;
+	}
+
+	private void dfs(List<String> res, String s, int start, StringBuilder path, int open) {
+		if (open < 0) // invalid.
+			return; 
+		if (!res.isEmpty() && path.length() + s.length() - start < res.get(0).length()) // not the min.
+			return; 
+		if (start == s.length()) {
+			if (open == 0 && (res.size() == 0 || path.length() == res.get(0).length()))
+				res.add(path.toString());
+			return;
+		}
+
+		path.append(s.charAt(start));
+		if (s.charAt(start) != '(' && s.charAt(start) != ')')
+			dfs(res, s, start + 1, path, open);
+		else {
+			dfs(res, s, start + 1, path, open + (s.charAt(start) == '(' ? 1 : -1));
+			while (start < s.length() - 1 && s.charAt(start) == s.charAt(start + 1))
+				start++;
+		}
+		path.deleteCharAt(path.length() - 1);
+
+		dfs(res, s, start + 1, path, open);
 	}
 
 	public static void main(String[] args) {
 		RemoveInvalidParentheses r = new RemoveInvalidParentheses();
-		System.out.println(r.removeInvalidParentheses("(a)())()"));
+		System.out.println(r.removeInvalidParentheses(")a("));
 		System.out.println(r.removeInvalidParentheses("()())()"));
+		System.out.println(r.removeInvalidParentheses(""));
 		System.out.println(r.removeInvalidParentheses(")("));
 	}
 }
