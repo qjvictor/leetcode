@@ -10,13 +10,15 @@ public class Pow {
 			return 1.0;
 		if (n == 1)
 			return x;
-		double half = myPow(x, n / 2); //get the half.
-		if (n % 2 == 0) { //even number
+		double half = myPow(x, n / 2); // get the half.
+		if (n % 2 == 0) { // even number
 			return half * half;
-		} else if (n > 0) { //odd number, but n>0
-			return half * half * x;
-		} else { //odd number, n<0
-			return half * half / x;  // 除以x is x的负1次方
+		} else { //odd number
+			if (n > 0) { // n>0
+				return half * half * x;
+			} else { // n<0
+				return half * half / x; // 除以x is x的负1次方
+			}
 		}
 	}
 	
@@ -47,12 +49,18 @@ public class Pow {
 	}
 	
 	public double myPow(double x, int n) {
-		//iterate
-		return 0d;
-	}
+		if (n == 0)
+			return 1;
+		if (n < 0) {//n==Integer.MIN_VALUE,  -n would be Integer.MIN_VALUE, same as n.
+			n = -n;
+			x = 1 / x;
+		}
+		return n % 2 == 0 ? myPow(x * x, n / 2) : x * myPow(x * x, n / 2);
+    }
 	
 	public static void main(String[] args){
 		Pow p = new Pow();
-		System.out.println(p._myPow(-1.00000, -2147483648));
+		System.out.println(p.myPow(1.00000, Integer.MIN_VALUE));
+		System.out.println(-1*Integer.MIN_VALUE);
 	}
 }
