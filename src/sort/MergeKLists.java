@@ -16,9 +16,8 @@ public class MergeKLists {
 	public ListNode mergeKLists(ListNode[] lists) {
 		if (lists == null || lists.length == 0)
 			return null;
-		// create a heap, using a custom comparator, which is using 'natural'
-		// order of ListNode's value.
-		Queue<ListNode> heap = new PriorityQueue<>(10, new Comparator<ListNode>() {
+		// create a heap, using a custom comparator, which is using 'natural' order of ListNode's value.
+		Queue<ListNode> heap = new PriorityQueue<>(lists.length, new Comparator<ListNode>() {
 			@Override
 			public int compare(ListNode o1, ListNode o2) {
 				return o1.val - o2.val;
@@ -38,13 +37,50 @@ public class MergeKLists {
 		ListNode newList = dummy;
 		while (!heap.isEmpty()) {
 			ListNode smallest = heap.poll();
-			newList.next = new ListNode(smallest.val);
-			newList = newList.next;
 			if (smallest.next != null)
 				heap.offer(smallest.next);
+			newList.next = smallest;
+			newList = newList.next;
 		}
 		return dummy.next;
 	}
+	
+	
+	//merge sort, better.
+	public ListNode _mergeKLists(ListNode[] lists) {
+	    if(lists.length == 0){
+	        return null;
+	    }
+	    return mergeLists(lists, 0 , lists.length - 1);
+	}
+	public ListNode mergeLists(ListNode[] lists, int left, int right){
+	    if(left == right){
+	        return lists[left];
+	    }
+	    else{
+	        int mid = (left + right) / 2;
+	        ListNode p1 = mergeLists(lists, left, mid);
+	        ListNode p2 = mergeLists(lists, mid + 1, right);
+	        return mergeTwo(p1, p2);
+	    }
+	}
+	public ListNode mergeTwo(ListNode l1, ListNode l2){
+	    if(l1 == null){
+	        return l2;
+	    }
+	    if(l2 == null){
+	        return l1;
+	    }
+	    if(l1.val > l2.val){
+	        l2.next = mergeTwo(l1, l2.next);
+	        return l2;
+	    }
+	    else{
+	        l1.next = mergeTwo(l1.next, l2);
+	        return l1;
+	    }
+	}
+	
 	
 	
 	public static void main(String[] args){

@@ -9,65 +9,47 @@ import datastructure.linkedlist.ListNode;
  * 
  */
 public class Merge2SortedLists {
-	// pointer manipulation only
+	// iterate
 	public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
 		if (l1 == null)
 			return l2;
 		if (l2 == null)
 			return l1;
 
-		ListNode tmp = null, prev = null, head = null;
+		ListNode dummy = new ListNode(-1);
+		ListNode tmp = dummy;
 		while (l1 != null && l2 != null) {
 			if (l1.val <= l2.val) {
-				tmp = l1;
+				tmp.next = l1;
 				l1 = l1.next;
 			} else {
-				tmp = l2;
+				tmp.next = l2;
 				l2 = l2.next;
 			}
-			
-			if (prev != null) { //prev is not null, point to tmp which is the next node, and move the prev to next.
-				prev.next = tmp;
-				prev = prev.next;
-			} else {  //prev is null, make head and prev point to same node, then never move head pointer.
-				prev = tmp;
-				head = prev;
-			}
+			tmp = tmp.next;
 		}
 		if (l1 != null)
 			tmp.next = l1;
 		if (l2 != null)
 			tmp.next = l2;
 
-		return head;
+		return dummy.next;
 	}
 	
-	// simple solution, new ListNode created
-	public ListNode mergeTwoLists2(ListNode l1, ListNode l2) {
+	// recursive
+	public ListNode mergeTwoListsRec(ListNode l1, ListNode l2) {
 		if (l1 == null)
 			return l2;
 		if (l2 == null)
 			return l1;
-		ListNode tmp = new ListNode(-1);
-		ListNode cur = tmp;
-		while (l1 != null && l2 != null) {
-			if (l1.val <= l2.val) {
-				cur.next = new ListNode(l1.val);
-				l1 = l1.next;
-			} else {
-				cur.next = new ListNode(l2.val);
-				l2 = l2.next;
-			}
-			cur = cur.next;
-		}
-		if (l1 != null) {
-			cur.next = l1;
+		if (l1.val > l2.val) {
+			l2.next = mergeTwoListsRec(l1, l2.next);
+			return l2;
 		} else {
-			cur.next = l2;
+			l1.next = mergeTwoListsRec(l1.next, l2);
+			return l1;
 		}
-
-		return tmp.next;
-	}
+    }
 
 	public static void main(String[] args) {
 		ListNode l1 = new ListNode(new int[] { 4, 7, 9, 10, 12, 37 });
@@ -75,5 +57,10 @@ public class Merge2SortedLists {
 		Merge2SortedLists m = new Merge2SortedLists();
 		ListNode merged = m.mergeTwoLists(l1, l2);
 		merged.print();
+		
+		l1 = new ListNode(new int[] { 4, 7, 9, 10, 12, 37 });
+		l2 = new ListNode(new int[] { 3, 6, 8, 10, 11, 22, 36, 39, 49 });
+		ListNode merged1 = m.mergeTwoListsRec(l1, l2);
+		merged1.print();
 	}
 }
