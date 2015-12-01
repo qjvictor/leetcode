@@ -44,23 +44,45 @@ public class RemoveDuplicatesFromSortedArray {
 	 * @param nums
 	 * @return
 	 */
+//	public int removeDuplicates2(int[] nums) {
+//		if (nums == null || nums.length == 0)
+//			return 0;
+//		if (nums.length <3)
+//			return nums.length;
+//		int pos = 2;
+//		int pre=nums[1];
+//		int prepre=nums[0];
+//		for (int i = 2; i < nums.length; i++) {
+//			if(nums[i]!=pre || (nums[i]==pre && nums[i]!=prepre)){
+//				prepre=pre;
+//				pre=nums[i];
+//				nums[pos++]=nums[i];
+//			}
+//		}
+//		return pos;
+//	}
+	
 	public int removeDuplicates2(int[] nums) {
-		if (nums == null || nums.length == 0)
+		if (nums == null)
 			return 0;
-		if (nums.length <3)
+		if (nums.length < 3)
 			return nums.length;
-		int pos = 2;
-		int pre=nums[1];
-		int prepre=nums[0];
+		int ret = 2;
+		int pre = nums[1];
+		int count = (pre == nums[0]) ? 2 : 1;
 		for (int i = 2; i < nums.length; i++) {
-			if(nums[i]!=pre || (nums[i]==pre && nums[i]!=prepre)){
-				prepre=pre;
-				pre=nums[i];
-				nums[pos++]=nums[i];
+			int cur = nums[i];
+			if (cur != pre) {
+				count = 1;
+				pre = cur;
+				nums[ret++] = cur;
+			} else if (count == 1) {
+				count++;
+				nums[ret++] = cur;
 			}
 		}
-		return pos;
-	}
+		return ret;
+    }
 
 	public static void main(String[] args) {
 		RemoveDuplicatesFromSortedArray r = new RemoveDuplicatesFromSortedArray();
