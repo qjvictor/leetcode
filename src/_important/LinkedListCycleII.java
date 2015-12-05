@@ -1,4 +1,6 @@
-package datastructure.linkedlist;
+package _important;
+
+import datastructure.linkedlist.ListNode;
 
 /**
  * Given a linked list, return the node where the cycle begins. If there is no

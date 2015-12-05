@@ -29,7 +29,7 @@ public class ThreeSumSmaller {
 			while (left < right) {
 				int sum = nums[i] + nums[left] + nums[right];
 				if (sum < target) {
-					ret+= right-left;//key
+					ret+= right-left;//Key!, KEy!, KEY!
 					left++;
 				} else {
 					right--;
@@ -41,6 +41,6 @@ public class ThreeSumSmaller {
 	
 	public static void main(String[] args){
 		ThreeSumSmaller t = new ThreeSumSmaller();
-		System.out.println(t.threeSumSmaller(new int[]{-2, 0,0, 1, 2, 2, 3,3, 3}, 2));
+		System.out.println(t.threeSumSmaller(new int[]{-2,0,1,3}, 4)); //[-2,0,3],[-2,0,1],[-2,1,3]
 	}
 }

@@ -28,24 +28,20 @@ public class TrappingRainWater {
 		}
 		return ret;
 	}
-	
+	//2 pointers.
 	public int trap(int[] height) {
 		if (height == null || height.length < 3)
 			return 0;
 		int[] left = new int[height.length];
-		left[0] = 0;
 		for (int i = 1; i < height.length; i++) {
 			left[i] = Math.max(left[i - 1], height[i - 1]);
 		}
 
 		int[] right = new int[height.length];
-		right[height.length - 1] = 0;
+		int ret = 0;
 		for (int i = height.length - 2; i >= 0; i--) {
 			right[i] = Math.max(right[i + 1], height[i + 1]);
-		}
-		int ret = 0;
-		for (int i = 0; i < height.length; i++) {
-			int diff = Math.min(left[i], right[i]) - height[i];
+			int diff = Math.min(left[i], right[i]) - height[i];  //diff could be negative: when current height is the highest
 			ret += diff < 0 ? 0 : diff;
 		}
 		return ret;
@@ -75,5 +71,6 @@ public class TrappingRainWater {
 	public static void main(String[] args){
 		TrappingRainWater t = new TrappingRainWater();
 		System.out.println(t.trap_best(new int[]{7,1,4,5,4}));
+		System.out.println(t.trap(new int[]{7,1,4,5,4}));
 	}
 }
