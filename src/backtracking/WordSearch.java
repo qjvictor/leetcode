@@ -60,8 +60,8 @@ public class WordSearch {
 		}
         char c = word.charAt(index);
         if(row<0 || row>=board.length || col<0 || col>=board[0].length 
-            || used[row][col] || c!=board[row][col])
-        return false;
+        		|| used[row][col] || c!=board[row][col])
+        	return false;
         used[row][col]=true;
         boolean isExisted = helper(board, word, used, index+1,row-1, col)
                             || helper(board, word, used, index+1,row+1, col)
