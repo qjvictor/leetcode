@@ -1,4 +1,4 @@
-package palindrome_permutation;
+package backtracking;
 
 import java.util.*;
 

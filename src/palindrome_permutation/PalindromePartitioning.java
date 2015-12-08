@@ -32,8 +32,9 @@ public class PalindromePartitioning {
 	        return;
 	    }
 	    for (int i = startPos; i < s.length(); i++) {
-	        if (isParlindrome(s.substring(startPos, i+1))){
-	        	list.add(s.substring(startPos, i+1));
+	    	String str = s.substring(startPos, i+1);
+	        if (isParlindrome(str)){
+	        	list.add(str);
 	        	helper(s, ret, list, i+1); //the start position is i+1, not startPos+1;
 	        	list.remove(list.size() - 1);
 	        }
@@ -41,10 +42,11 @@ public class PalindromePartitioning {
 	}
 	
 	private boolean isParlindrome(String s){
-		if(s.length()<=1) return true;
-		int left=0, right=s.length()-1;
-		while(left<right){
-			if(s.charAt(left)!=s.charAt(right)){
+		if (s.length() <= 1)
+			return true;
+		int left = 0, right = s.length() - 1;
+		while (left < right) {
+			if (s.charAt(left) != s.charAt(right)) {
 				return false;
 			}
 			left++;
