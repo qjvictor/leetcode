@@ -1,4 +1,4 @@
-package array;
+package _important;
 
 /**
  * You are playing the following Flip Game with your friend: Given a string that
