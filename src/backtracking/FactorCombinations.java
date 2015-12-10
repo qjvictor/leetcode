@@ -67,14 +67,14 @@ public class FactorCombinations {
     }
 
 	private void helper(List<List<Integer>> ret, ArrayList<Integer> list, int n, int index) {
-		for(int i=index;i<=Math.sqrt(n);i++){
-			if(n%i==0){
+		for (int i = index; i <= Math.sqrt(n); i++) {
+			if (n % i == 0) {
 				list.add(i);
-				list.add(n/i);
+				list.add(n / i);
 				ret.add(new ArrayList<>(list));
-				list.remove(list.size()-1);
-				helper(ret, list, n/i, i);
-				list.remove(list.size()-1);
+				list.remove(list.size() - 1);
+				helper(ret, list, n / i, i);
+				list.remove(list.size() - 1);
 			}
 		}
 	}
