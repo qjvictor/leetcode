@@ -96,6 +96,36 @@ public class RepeatedDNASequences {
 		return ret;
 	}
 	
+	public List<String> findRepeatedDnaSequences2(String s) {
+        List<String> list = new ArrayList<>();
+        if(s==null || s.length()<11) return list;
+        Map<Character, Integer> map = new HashMap<>();
+        map.put('A',0);//00
+        map.put('C',1);//01
+        map.put('G',2);//10
+        map.put('T',3);//11
+        Set<Integer> set = new HashSet<>();
+        for(int i=0;i<=s.length()-10;i++){
+            String str = s.substring(i, i+10);
+            int hash = getHash(str, map);
+            if(set.contains(hash)){
+                if(!list.contains(str))
+                    list.add(str);
+            }else{
+                set.add(hash);
+            }
+        }
+        return list;
+    }
+    
+    private int getHash(String str, Map<Character, Integer> map){
+        int hash = 0;
+        for(char c: str.toCharArray()){
+            hash=(hash<<2) | map.get(c);
+        }
+        return hash;
+    }
+	
 	
 	public static void main(String[] args){
 		RepeatedDNASequences r = new RepeatedDNASequences();
