@@ -15,17 +15,19 @@ package mathandbit;
 public class ReverseBits {
 	// you need treat n as an unsigned value
     public int reverseBits(int n) {
-		int ret = 0;
-		for (int i = 0; i < 32; i++) {
-			int t = n & (1 << i);
-			ret = (ret << 1) + ((t == 0) ? 0 : 1);
-			i++;
-		}
-		return ret;
+    	int ret=0;
+        for(int i=0;i<32;i++){
+            ret=(ret<<1) + (n&1);
+            n>>=1;
+        }
+        return ret;
     }
     
     public static void main(String[] args){
     	ReverseBits r = new ReverseBits();
     	System.out.println(r.reverseBits(43261596));
+    	System.out.println(r.reverseBits(964176192));
+    	System.out.println(r.reverseBits(Integer.MAX_VALUE));
+    	System.out.println(r.reverseBits(Integer.MIN_VALUE));
     }
 }

@@ -12,20 +12,10 @@ package mathandbit;
  */
 public class NumberOf1Bits {
 	// you need to treat n as an unsigned value
-//    public int _hammingWeight(int n) {
-//		int ret = 0;
-//		int i = 0;
-//		while (i < 32) {
-//			ret += (n & (1 << i)) == 0 ? 0 : 1;
-//			i++;
-//		}
-//		return ret;
-//    }
-    
     public int hammingWeight(int n) {
 		int ret = 0;
 		while (n != 0) {
-			ret += (n - (n >> 1 << 1));
+			ret += (n & 1);
 			n >>>= 1;
 		}
 		return ret;
@@ -34,5 +24,8 @@ public class NumberOf1Bits {
     public static void main(String[] args){
     	NumberOf1Bits n = new NumberOf1Bits();
     	System.out.println(n.hammingWeight(Integer.MAX_VALUE));
+    	System.out.println(n.hammingWeight(Integer.MIN_VALUE));
+    	System.out.println(Integer.toBinaryString(Integer.MAX_VALUE));
+    	System.out.println(Integer.toBinaryString(Integer.MIN_VALUE));
     }
 }

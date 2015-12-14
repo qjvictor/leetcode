@@ -40,13 +40,10 @@ public class WordBreakII {
 	}
 
 	public static void main(String[] args) {
-		Set<String> dict = new HashSet<String>();
-		dict.add("cat");
-		dict.add("cats");
-		dict.add("and");
-		dict.add("sand");
-		dict.add("dog");
 		WordBreakII w = new WordBreakII();
-		System.out.println(w.wordBreak("catsanddog", dict));
+		String[] words = new String[]{"a","aa","aaa","aaaa","aaaaa","aaaaaa","aaaaaaa","aaaaaaaa","aaaaaaaaa","aaaaaaaaaa"};
+		Set<String> dict = new HashSet<String>(Arrays.asList(words)); 
+		System.out.println(w.wordBreak("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab", dict));
+		
 	}
 }
