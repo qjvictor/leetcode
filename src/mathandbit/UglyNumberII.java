@@ -62,7 +62,7 @@ public class UglyNumberII {
 	
 	public static void main(String[] args){
 		UglyNumberII u = new UglyNumberII();
-		System.out.println(u.nthUglyNumber(1407));
+		System.out.println(u.nthUglyNumber(10));
 		System.out.println(u.nthUglyNumber1(1407));
 	}
 }

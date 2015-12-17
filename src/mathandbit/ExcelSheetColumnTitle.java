@@ -19,10 +19,14 @@ public class ExcelSheetColumnTitle {
 		if (n <= 0)
 			return "";
 		StringBuilder sb = new StringBuilder();
-		while (n > 0) {
-			sb.append((char) ((n - 1) % 26 + 'A'));
-			n = (n - 1) / 26;
-		}
+		 
+	    while(n > 0){
+	        n--;  //that's the key:  The minimum in 26-bit number is mapped to 1, not 0.
+	        char ch = (char) (n % 26 + 'A');
+	        n /= 26;
+	        sb.append(ch);
+	    }
+	 
 		return sb.reverse().toString();
 	}
 	

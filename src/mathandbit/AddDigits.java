@@ -18,6 +18,16 @@ public class AddDigits {
 	public int addDigits(int num) {
 		return num == 0 ? 0 : (num % 9 == 0 ? 0 : num % 9);
 	}
+	
+	public int _addDigits(int num) {
+        if(num<=9) return num;
+        int ret=0;
+        while(num!=0){
+            ret+=num%10;
+            num/=10;
+        }
+        return addDigits(ret);
+    }
 
 	public static void main(String[] args) {
 		AddDigits a = new AddDigits();
