@@ -1,4 +1,4 @@
-package mathandbit;
+package _important;
 
 /**
  * Validate if a given string is numeric.
