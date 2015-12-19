@@ -25,7 +25,7 @@ public class PermutationSequence {
 	public String getPermutation(int n, int k) {
 		if (n > 9 && n < 1)
 			return "";
-		k--;  // change K from (1,n) to (0, n-1) to accord to index  
+		k--; // change K from (1,n) to (0, n-1) to accord to index
 		int fact = 1;
 		for (int i = 1; i < n; i++) { // fact=(n-1)!
 			fact = fact * i;
@@ -36,15 +36,15 @@ public class PermutationSequence {
 			nums.add(i);
 		}
 
-		int round = n - 1;
-		while (round >= 0) {
+		int digitPos = 0;  // position of the digit from left to right
+		while (digitPos<n) {
 			int index = k / fact;
 			k %= fact;
 			sb.append(nums.get(index));
 			nums.remove(index);
-			if (round != 0)
-				fact = fact / round;
-			round--;
+			if (digitPos != (n-1))
+				fact = fact / (n-1-digitPos);
+			digitPos++;
 		}
 		return sb.toString();
 	}
@@ -52,6 +52,6 @@ public class PermutationSequence {
 	
 	public static void main(String[] args){
 		PermutationSequence  p = new PermutationSequence();
-		System.out.println(p.getPermutation(8, 8590));
+		System.out.println(p.getPermutation(8, 8590));  //26847351
 	}
 }
