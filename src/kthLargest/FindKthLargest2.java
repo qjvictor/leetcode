@@ -33,7 +33,7 @@ public class FindKthLargest2 {
 	private int partition(int a[], int l, int r) {
 		if (l == r)
 			return l;
-		int pivotIndex = (l + r) >> 1; // l+(r-l)/2;
+		int pivotIndex =  l+(r-l)/2;
 		int pivot = a[pivotIndex];
 		
 		swap(a, pivotIndex, r);//move the pivot to the right most.
