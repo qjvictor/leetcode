@@ -21,17 +21,16 @@ public class LongestIncreasingSubsequence {
 	public int lengthOfLIS(int[] nums) {
 		if (nums == null || nums.length == 0)
 			return 0;
-		int[] dp = new int[nums.length];
-		dp[0] = 1;
+		int[] len = new int[nums.length];
 		int ret = 0;
 		for (int i = 0; i < nums.length; i++) {
-			dp[i] = 1;
+			len[i] = 1;
 			for (int j = 0; j < i; j++) {
 				if (nums[j] < nums[i]) {
-					dp[i] = Math.max(dp[i], dp[j] + 1);
+					len[i] = Math.max(len[i], len[j] + 1);
 				}
 			}
-			ret = Math.max(ret, dp[i]);
+			ret = Math.max(ret, len[i]);
 		}
 		return ret;
     }
@@ -63,5 +62,6 @@ public class LongestIncreasingSubsequence {
 	public static void main(String[] args){
 		LongestIncreasingSubsequence l = new LongestIncreasingSubsequence();
 		System.out.println(l.lengthOfLIS_BinarySearch(new int[]{10, 9, 2, 5, 3, 7, 101, 18}));
+		System.out.println(l.lengthOfLIS(new int[]{10, 9, 2, 5, 3, 7, 101, 18}));
 	}
 }
