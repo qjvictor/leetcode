@@ -54,7 +54,7 @@ public class LongestPalindromeSubsequence {
 	public static void main(String[] args){
 		LongestPalindromeSubsequence l = new LongestPalindromeSubsequence();
 		System.out.println(l.lengthOfLongestPalindromeSubsequence("agbdba"));
-		System.out.println(l.lengthOfLongestPalindromeSubsequence2("agbdba"));
-		System.out.println(l.lengthOfLongestPalindromeSubsequence2("ACBAC"));
+		//System.out.println(l.lengthOfLongestPalindromeSubsequence2("agbdba"));
+		//System.out.println(l.lengthOfLongestPalindromeSubsequence2("ACBAC"));
 	}
 }

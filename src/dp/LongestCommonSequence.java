@@ -9,19 +9,19 @@ public class LongestCommonSequence {
 			return 0;
 		int len1 = str1.length();
 		int len2 = str2.length();
-		int[][] lens = new int[len1 + 1][len2 + 1];
+		int[][] len = new int[len1 + 1][len2 + 1];
 		for (int i = 1; i <= len1; i++) {
 			char c1 = str1.charAt(i - 1);
 			for (int j = 1; j <= len2; j++) {
 				char c2 = str2.charAt(j - 1);
 				if (c1 == c2) {
-					lens[i][j] = 1 + lens[i - 1][j - 1];
+					len[i][j] = 1 + len[i - 1][j - 1];
 				} else {
-					lens[i][j] = Math.max(lens[i][j - 1], lens[i - 1][j]);
+					len[i][j] = Math.max(len[i][j - 1], len[i - 1][j]);
 				}
 			}
 		}
-		return lens[len1][len2];
+		return len[len1][len2];
 	}
 	
 	public List<String> printLongestCommonSequence(String str1, String str2){
@@ -73,7 +73,7 @@ public class LongestCommonSequence {
 		return str;
 	}
 
-	public static void main(String[] args){
+	public static void main(String[] args) {
 		LongestCommonSequence l = new LongestCommonSequence();
 		System.out.println(l.lengthOfLongestCommonSequence("abcdef", "acbcf"));
 		System.out.println(l.printLongestCommonSequence("abcdef", "acbcf"));

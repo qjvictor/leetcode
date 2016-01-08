@@ -13,7 +13,55 @@ package dp;
  * 
  */
 public class PalindromePartitioningII {
+	public static void main(String[] args){
+		PalindromePartitioningII p = new PalindromePartitioningII();
+		System.out.println(p.minCut("abcbm"));
+		System.out.println(p._minCut("abcbm"));
+	}
+	
 	public int minCut(String s) {
+		if (s == null || s.length() == 0) {
+			return 0;
+		}
+
+		int n = s.length();
+		int[][] dp = new int[n][n];
+		for(int i=0;i<n;i++){
+			for(int j=i;j<n;j++){
+				if(i==j || j-i==1){
+					dp[i][j]=0;
+				}else{
+					String str = s.substring(i, j);
+					if(isParlindrome(str)){
+						dp[i][j]=0;
+					}else{
+						int min = Integer.MAX_VALUE;
+						for (int k = i; k < j; k++) {
+							min = Math.min(dp[i][k] + dp[k][j] + 1, min);
+						}
+						dp[i][j] = min;
+					}
+				}
+			}
+		}
+		return dp[0][n-1];
+	}	
+	
+	private boolean isParlindrome(String s){
+		if (s.length() <= 1)
+			return true;
+		int left = 0, right = s.length() - 1;
+		while (left < right) {
+			if (s.charAt(left) != s.charAt(right)) {
+				return false;
+			}
+			left++;
+			right--;
+		}
+		return true;
+	}
+	
+	public int _minCut(String s) {
 		if (s == null || s.length() == 0) {
 			return 0;
 		}
@@ -48,7 +96,6 @@ public class PalindromePartitioningII {
 
 	boolean[][] buildMatrix(String s, int n) {
 		boolean[][] dp = new boolean[n][n];
-
 		for (int i = n - 1; i >= 0; i--) {
 			for (int j = i; j < n; j++) {
 				if (s.charAt(i) == s.charAt(j) && (j - i <= 2 || dp[i + 1][j - 1])) {
