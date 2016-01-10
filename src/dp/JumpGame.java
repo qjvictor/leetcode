@@ -15,20 +15,22 @@ A = [3,2,1,0,4], return false.
  */
 public class JumpGame {
 	public boolean canJump(int[] nums) {
-		if(nums==null || nums.length<=1) return true;
-		int distance=0;
-		for(int i=0;i<nums.length && i<=distance;i++){
-			distance=Math.max(nums[i]+i, distance);
+		if (nums == null || nums.length <= 1)
+			return true;
+		int distance = 0;
+		for (int i = 0; i < nums.length && i <= distance; i++) {
+			distance = Math.max(nums[i] + i, distance);
 		}
-		return distance>=nums.length-1;
+		return distance >= nums.length - 1;
     }
 	
 	public boolean _canJump(int[] nums) {
-        int max =0;
-        for(int i=0;i<nums.length; i++){
-            if(max<i) return false;
-            max=Math.max(max, i+nums[i]);
-        }
+		int furthest = 0;
+		for (int i = 0; i < nums.length; i++) {
+			if (furthest < i)
+				return false;
+			furthest = Math.max(furthest, i + nums[i]);
+		}
         return true;
     }
 	
