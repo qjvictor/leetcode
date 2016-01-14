@@ -47,7 +47,7 @@ public class PaintFence {
 	 * The reason why we have these two cases is that we can easily compute both
 	 * of them, and that is all I do. When adding a new post, we can use the
 	 * same color as the last one (if allowed) or different color. If we use
-	 * different color, there're k-1 options, and the outcomes shoule belong to
+	 * different color, there're k-1 options, and the outcomes should belong to
 	 * the diffColorCounts category. If we use same color, there's only one
 	 * option, and we can only do this when the last two have different colors
 	 * (which is the diffColorCounts). There we have our induction step.
@@ -67,7 +67,7 @@ public class PaintFence {
 		}
 		return diffColorCounts + sameColorCounts;
 	}
-
+	
 	public static void main(String[] args) {
 		PaintFence p = new PaintFence();
 		System.out.println(p._numWays(5, 5));
