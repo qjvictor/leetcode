@@ -18,7 +18,7 @@ package dp;
  * 
  */
 public class DecodeWays {
-	public int numDecodings(String s) {
+	public int _numDecodings(String s) {
 		if (s.isEmpty() || s.charAt(0) == '0')
 			return 0;
 		
@@ -43,9 +43,36 @@ public class DecodeWays {
         return dp[dp.length - 1];
     }
 	
+	public int numDecodings(String s) {
+		if (s == null || s.length() == 0 || s.charAt(0) == '0')
+			return 0;
+		int[] ret = new int[s.length()];
+		ret[0] = 1;
+		char[] chars = s.toCharArray();
+		for (int i = 1; i < s.length(); i++) {
+			char pre = chars[i - 1];
+			char cur = chars[i];
+			if (cur == '0') {
+				if (pre == '0' || pre >= '3') {
+					return 0;
+				} else if (i == 1) {
+					ret[i] = 1;
+				} else {
+					ret[i] = ret[i - 2];
+				}
+			} else if (pre == '0' || pre >= '3' || (pre == '2' && cur >= '7')) {
+				ret[i] = ret[i - 1];
+			} else {
+				ret[i] = ret[i - 1] + (i > 1 ? ret[i - 2] : 1);
+			}
+		}
+		return ret[s.length() - 1];
+    }
+	
 	public static void main(String[] args){
 		DecodeWays d = new DecodeWays();
-		System.out.println(d.numDecodings("123"));
+		System.out.println(d.numDecodings("0"));
+		System.out.println(d._numDecodings("0"));
 		System.out.println(d.numDecodings("127"));
 		System.out.println(d.numDecodings("107"));
 		System.out.println(d.numDecodings("1307"));

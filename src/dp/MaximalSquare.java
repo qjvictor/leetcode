@@ -18,12 +18,12 @@ public class MaximalSquare {
 		if (matrix == null || matrix.length == 0 || matrix[0] == null || matrix[0].length == 0)
 			return 0;
 		int m = matrix.length, n = matrix[0].length, maxLen = 0;
-		int[][] b = new int[m + 1][n + 1]; //b[i][j] represent the edge length of the largest square ENDING at position (i, j)
+		int[][] len = new int[m + 1][n + 1]; //len[i][j] represent the edge length of the largest square ENDING at position (i, j)
 		for (int i = 1; i <= m; i++) {
 			for (int j = 1; j <= n; j++) {
 				if (matrix[i - 1][j - 1] == '1') {
-					b[i][j] = Math.min(Math.min(b[i][j - 1], b[i - 1][j - 1]), b[i - 1][j]) + 1;
-					maxLen = Math.max(b[i][j], maxLen); // update max length
+					len[i][j] = Math.min(Math.min(len[i][j - 1], len[i - 1][j - 1]), len[i - 1][j]) + 1;
+					maxLen = Math.max(len[i][j], maxLen); // update max length
 				}
 			}
 		}
